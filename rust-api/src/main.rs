@@ -15,10 +15,11 @@ async fn main() {
 }
 
 async fn get_data() -> Json<Value> {
-    // Un JSON ligeramente distinto para identificar esta API
+    // El JSON exacto solicitado en la rúbrica para la API 2
     Json(json!({
-        "api": "Rust",
-        "mensaje": "Respuesta exitosa desde la API en Rust",
-        "estado": "Activo"
+        "Instancia": "Instancia #2 - API #2",
+        "Curso": "Seminario de Sistemas 1",
+        "Estudiante": "Estudiante - 202302220",
+        "Lenguaje": "Rust",
     }))
 }

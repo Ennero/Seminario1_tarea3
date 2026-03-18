@@ -12,11 +12,12 @@ func main() {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Content-Type", "application/json")
 		
-		// El JSON con la estructura solicitada
+		// El JSON exacto solicitado en la rúbrica para la API 1
 		json.NewEncoder(w).Encode(map[string]string{
-			"api": "GoLang",
-			"mensaje": "Respuesta exitosa desde la API en Go",
-			"estado": "Activo",
+			"Instancia":  "Instancia #1 - API #1",
+			"Curso":      "Seminario de Sistemas 1",
+			"Estudiante": "Estudiante - 202302220",
+			"Lenguaje":   "Go",
 		})
 	})
 
