@@ -15,17 +15,14 @@
             <h3 class="text-lg font-medium text-slate-500 bg-slate-100 inline-block px-4 py-1 rounded-full">Carnet: 202302220</h3>
         </div>
         
-        <div class="flex flex-col sm:flex-row gap-4 mb-8">
-            <button onclick="obtenerDatos('http://localhost:8081/get-data')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl shadow-sm transition-all duration-200 focus:ring-4 focus:ring-blue-100 active:scale-95">
-                Obtener JSON (Go)
-            </button>
-            <button onclick="obtenerDatos('http://localhost:8082/get-data')" class="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-xl shadow-sm transition-all duration-200 focus:ring-4 focus:ring-orange-100 active:scale-95">
-                Obtener JSON (Rust)
+        <div class="flex justify-center mb-8">
+            <button onclick="obtenerDatos('http://9.205.155.126/get-data')" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-xl shadow-sm transition-all duration-200 focus:ring-4 focus:ring-blue-100 active:scale-95 text-lg">
+                Llamar al Balanceador de Carga
             </button>
         </div>
 
         <div>
-            <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-3">Respuesta del Balanceador:</h4>
+            <h4 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-3">Respuesta del Servidor:</h4>
             <div class="relative shadow-lg rounded-xl overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-8 bg-slate-800 flex items-center px-4 gap-2">
                     <div class="w-3 h-3 rounded-full bg-red-500"></div>
@@ -40,25 +37,20 @@
     <script>
         async function obtenerDatos(url) {
             const contenedor = document.getElementById('json-resultado');
-            
-            // Estado de carga (gris)
             contenedor.style.color = "#94a3b8"; 
-            contenedor.textContent = "Conectando con el servidor...";
+            contenedor.textContent = "Consultando al balanceador...";
             
             try {
                 const respuesta = await fetch(url);
                 if (!respuesta.ok) throw new Error("Error HTTP: " + respuesta.status);
                 
                 const datos = await respuesta.json();
-                
-                // Si es exitoso, muestra el JSON en color verde neón
                 contenedor.style.color = "#4ade80"; 
                 contenedor.textContent = JSON.stringify(datos, null, 4);
                 
             } catch (error) {
-                // Si falla, muestra el error en color rojo claro
                 contenedor.style.color = "#f87171"; 
-                contenedor.textContent = "Error al conectar con la API:\n" + error.message + "\n\n¿Están corriendo los contenedores de Docker?";
+                contenedor.textContent = "Error al conectar con el balanceador:\n" + error.message;
             }
         }
     </script>
